@@ -41,17 +41,17 @@ def load_results(folder='test'):
 
 def plot_graphs(results, game_mode, extensive=False, statistics=True):
     '''
-    
-    Input : 
+
+    Input :
         results - dict
         game_mode - str, one of 'straight','diagonal', 'diagonal_slow', 'random'
         extensive - bool
-        statistics - bool 
-    Output: 
-        Returns a figure with 2 or 6 subplots (7 in case game_mode == 'random') 
+        statistics - bool
+    Output:
+        Returns a figure with 2 or 6 subplots (7 in case game_mode == 'random')
         extensive=False:
             1. Win Rate - The success rate of each agent
-            2. Extra Moves per Steps - The number of undesirable behaviors performed by the agent per number of steps. 
+            2. Extra Moves per Steps - The number of undesirable behaviors performed by the agent per number of steps.
         extensive=True:
             1. Wins - The number of successful episodes of each agent
             2. Win Rate - The success rate of each agent
@@ -65,15 +65,15 @@ def plot_graphs(results, game_mode, extensive=False, statistics=True):
 
     if extensive:
         nof_graphs = 7 if game_mode == 'random' else 6
-        fig, axs = plt.subplots(nof_graphs, figsize=(20, 5*nof_graphs))
-        axs[0].set_title('Wins', color='C0')
-        axs[1].set_title('Win rate ({})'.format(title), color='C0')
-        axs[2].set_title('Moves ({})'.format(title), color='C0')
-        axs[3].set_title('Wall Hits ({})'.format(title), color='C0')
-        axs[4].set_title('Moves per Step ({})'.format(title), color='C0')
-        axs[5].set_title('Wall Hits per Step ({})'.format(title), color='C0')
+        fig, axs = plt.subplots(nof_graphs, figsize=(20, 7*nof_graphs))
+        axs[0].set_title('Wins', color='C0'); axs[0].set_ylabel('Wins')
+        axs[1].set_title('Win rate ({})'.format(title), color='C0'); axs[1].set_ylabel('Win Rate')
+        axs[2].set_title('Moves ({})'.format(title), color='C0'); axs[2].set_ylabel('Moves')
+        axs[3].set_title('Wall Hits ({})'.format(title), color='C0'); axs[3].set_ylabel('Wall Hits')
+        axs[4].set_title('Moves per Step ({})'.format(title), color='C0'); axs[4].set_ylabel('Moves / Step')
+        axs[5].set_title('Wall Hits per Step ({})'.format(title), color='C0'); axs[5].set_ylabel('Wall Hits/Step')
         if game_mode == 'random':
-            axs[6].set_title('Steps per Epoch ({})'.format(title), color='C0')
+            axs[6].set_title('Steps per Epoch ({})'.format(title), color='C0'); axs[6].set_ylabel('Steps')
         for reward_mode in reward_modes:
             axs[0].plot(results[reward_mode+'_'+game_mode][0][:,1], label=reward_mode)
             axs[1].plot(results[reward_mode+'_'+game_mode][0][:,2], label=reward_mode)
@@ -85,9 +85,9 @@ def plot_graphs(results, game_mode, extensive=False, statistics=True):
                 axs[6].plot(results[reward_mode+'_'+game_mode][0][:,5].cumsum()/results[reward_mode+'_'+game_mode][0][:,0], label=reward_mode)
     else:
         nof_graphs = 2
-        fig, axs = plt.subplots(nof_graphs, figsize=(20, 5*nof_graphs))
-        axs[0].set_title('Win rate ({})'.format(title), color='C0')
-        axs[1].set_title('Extra Moves per Step ({})'.format(title), color='C0')
+        fig, axs = plt.subplots(nof_graphs, figsize=(20, 7*nof_graphs))
+        axs[0].set_title('Win rate ({})'.format(title), color='C0'); axs[0].set_ylabel('Win Rate')
+        axs[1].set_title('Extra Moves per Step ({})'.format(title), color='C0'); axs[1].set_ylabel('Extra Moves / Steps')
         for reward_mode in reward_modes:
             axs[0].plot(results[reward_mode+'_'+game_mode][0][:,2], label=reward_mode)
             axs[1].plot((results[reward_mode+'_'+game_mode][0][:,3]+results[reward_mode+'_'+game_mode][0][:,4]).cumsum() / results[reward_mode+'_'+game_mode][0][:,5].cumsum(), label=reward_mode)
@@ -95,6 +95,7 @@ def plot_graphs(results, game_mode, extensive=False, statistics=True):
     for i in range(nof_graphs):
         axs[i].grid()
         axs[i].legend()
+        axs[i].set_xlabel('Epochs')
 
     if statistics:
         if extensive:
@@ -133,7 +134,7 @@ def count_uniques(data, uniques=[0,1,2]):
 
 def get_uniques(data,digits=5):
     '''
-    
+
     '''
     uniques = set()
     for item in data:
@@ -171,7 +172,7 @@ def noD_mode(data, uniques=[0,1,2]):
 
 def plot_actions_bar (results):
     '''
-    Returns a figure with 4 bar subplots of the frequency of the actions 
+    Returns a figure with 4 bar subplots of the frequency of the actions
     that the agent perfomed during training or testing
     '''
     fig, axs = plt.subplots(2,2,figsize=(20,10))
@@ -197,8 +198,8 @@ def plot_actions_bar (results):
 
 def plot_actions_mod (results):
     '''
-    Returns a figure with 4 subplots of the most frequent (mode) action that the 
-    agent perfomed at each time step 
+    Returns a figure with 4 subplots of the most frequent (mode) action that the
+    agent perfomed at each time step
     '''
     fig, axs = plt.subplots(2,2,figsize=(20,10))
     fig.suptitle('Actions Taken at Each Time-Step', fontsize=30,color='b')
@@ -214,6 +215,7 @@ def plot_actions_mod (results):
             axs[i, j].plot(data, label=reward_mode)
 
         axs[i, j].set_yticks([-1, 0, 1])
+        axs[i, j].set_xlabel('Steps')
         axs[i, j].set_yticklabels(('left','stay','right'))
         axs[i, j].title.set_text('Actions ({})'.format(game_mode.title()));
         axs[i, j].grid()
@@ -240,6 +242,8 @@ def gif_maker(path):
                 writer.append_data(image)
 
 
+
+
 def load_images(path):
     '''
     Loads and returns the images that where saved during testing
@@ -254,7 +258,7 @@ def load_images(path):
 
 def animation_maker(path, save=None):
     '''
-    Creates an matplotlib.animation object that can be saved 
+    Creates an matplotlib.animation object that can be saved
     either in .mp4 or as a jshtml str
     '''
     if save:
@@ -275,8 +279,8 @@ def animation_maker(path, save=None):
             try:
                 img = images[reward_mode+'_'+game_mode][frame]
             except IndexError:
-                # in case of IndeError use the last available. 
-                #done to keep the videos with different number of total frames  
+                # in case of IndeError use the last available.
+                #done to keep the videos with different number of total frames
                 img = images[reward_mode+'_'+game_mode][len(images[reward_mode+'_'+game_mode])-1]
             axs[i].imshow(plt.imread(img))
 
