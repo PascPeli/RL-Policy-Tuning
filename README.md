@@ -35,10 +35,11 @@ For this reason, in addition to the Default function, two new approaches were im
 While using the Default Reward Function (1), our agent receives a reward value by the end of the episode.
 This reward is a constant value and is determined only by the outcome of the episode. As described above the default approach returns a value of 1 for every successful episode, fruit in the basket, and value of -1 if it was unsuccessful, the fruit gets lost. The reward value for each timestep other than the last of the episode is equal to 0. In this method, we can say that the rewards are sparse. This way we don't penalize extra moves or moves that don't change the location of the agent (against the wall). The agent might understand that those moves offer nothing eventually, but this might take longer training times. 
 
-$$Reward_{default}(t,w)=\begin{cases}\ \,\ 0 & t < last\_step \\ \ \,\ 1 & t = last\_step,\ w= 1\\-1 & t = last\_step,\ w= 0\end{cases}  \quad\big(1\big)$$
+![equation](https://latex.codecogs.com/gif.latex?Reward_{default}(t,w)=\begin{cases}\&space;\,\&space;0&space;&&space;t&space;<&space;last\_step&space;\\&space;\&space;\,\&space;1&space;&&space;t&space;=&space;last\_step,\&space;w=&space;1\\-1&space;&&space;t&space;=&space;last\_step,\&space;w=&space;0\end{cases}&space;\quad\big(1\big))
 
 Where <b>t</b> denotes the time-step of the episode, <b>w</b> is its outcome and <b>p</b> is the penalty applied to extra moves. In our case:
-$$ t \in (0,last\_step]\ ,\quad  w =\begin{cases}0 & unsuccessful\\1 & successful\end{cases}\  ,\quad p = -0.04$$
+![equation](https://latex.codecogs.com/gif.latex?t&space;\in&space;(0,last\_step]\&space;,\quad&space;w&space;=\begin{cases}0&space;&&space;unsuccessful\\1&space;&&space;successful\end{cases}\&space;,\quad&space;p&space;=&space;-0.04)
+
 
 #### II. Penalized Once Reward Function
 
@@ -46,13 +47,13 @@ In this approach, the mentality remains the same with the default function with 
 
 ![equation](https://latex.codecogs.com/gif.latex?Reward_{penalty\_once}\&space;(t,w)=\begin{cases}\&space;\,\&space;0&space;&&space;t&space;<&space;last\_step&space;\\&space;\&space;\,\&space;1&plus;ExtraMoves*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;1\\-1&plus;ExtraMoves*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;0\end{cases}&space;\quad\big(2\big))
 
-$$Reward_{penalty\_once}\ (t,w)=\begin{cases}\ \,\ 0 & t < last\_step \\ \ \,\ 1+ExtraMoves*p & t = last\_step,\ w= 1\\-1+ExtraMoves*p & t = last\_step,\ w= 0\end{cases}  \quad\big(2\big)$$
 
 #### III. Penalized Reward Function
 
 Conversely, The Penalized reward function returns at each step a value which is calculated based on the number of extra moves made up to this point and at the last step, the reward of the episode's outcome is added (3). The reward changes every time the agent is performing an extra move. Thus, the agent can assign a reward to each of his actions and in that way, he learns more consistently and in fewer iterations that extra moves yield lower rewards while maintaining the notion that catching the fruit is rewarded highly. 
 
-$$Reward_{penalty}(t,w)=\begin{cases}\ \,\ ExtraMoves(t)*p & t < last\_step \\ \ \,\ 1+ExtraMoves(t)*p & t = last\_step,\ w= 1\\-1+ExtraMoves(t)*p & t = last\_step,\ w= 0\end{cases}  \quad\big(3\big)$$
+![equation](https://latex.codecogs.com/gif.latex?Reward_{penalty}(t,w)=\begin{cases}\&space;\,\&space;ExtraMoves(t)*p&space;&&space;t&space;<&space;last\_step&space;\\&space;\&space;\,\&space;1&plus;ExtraMoves(t)*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;1\\-1&plus;ExtraMoves(t)*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;0\end{cases}&space;\quad\big(3\big))
+
 
 
 ## Game Modes
