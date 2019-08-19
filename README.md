@@ -7,7 +7,8 @@
 In this Notebook, I will be using a simple 2D game environment and a Reinforcement Learning agent with different reward functions to evaluate the importance of the reward function to the actions of the agent and to the outcome of the game. The policy of an RL agent is what determines his behaviors. The reward signal, calculated by the reward function, is what determines the policy of an agent.
 
 <img src=https://raw.githubusercontent.com/PascPeli/RL-Policy-Tuning/master/data/presentation/main.gif alt="Drawing" style="width: 1000px;"/>
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Fig.1 - Resaults of Default and Penalized Reward Functions
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Fig.1 - Resaults of Default and Penalized Reward Functions
+
 
 The game environment used is a simulation of the game "Catch" where fruits fall from the top of the screen and the player has to catch them in his basket. Every time he catches one fruit he is rewarded with 1 point and every time he misses one he gets a negative reward of -1.
 In each step of the game, the player can take one of the three following actions, go left, stay in the same place, or go right. These three are going to be the action space from which our agent can choose each step.
@@ -38,7 +39,7 @@ This reward is a constant value and is determined only by the outcome of the epi
 ![equation](https://latex.codecogs.com/gif.latex?Reward_{default}(t,w)=\begin{cases}\&space;\,\&space;0&space;&&space;t&space;<&space;last\_step&space;\\&space;\&space;\,\&space;1&space;&&space;t&space;=&space;last\_step,\&space;w=&space;1\\-1&space;&&space;t&space;=&space;last\_step,\&space;w=&space;0\end{cases}&space;\quad\big(1\big))
 
 Where <b>t</b> denotes the time-step of the episode, <b>w</b> is its outcome and <b>p</b> is the penalty applied to extra moves. In our case:
-![equation](https://latex.codecogs.com/gif.latex?t&space;\in&space;(0,last\_step]\&space;,\quad&space;w&space;=\begin{cases}0&space;&&space;unsuccessful\\1&space;&&space;successful\end{cases}\&space;,\quad&space;p&space;=&space;-0.04)
+![equation](https://latex.codecogs.com/gif.latex?t&space;\in&space;(0,last\_step]\&space;,\quad&space;w&space;=\begin{cases}0&space;&&space;unsuccessful\\1&space;&&space;successful\end{cases}\&space;,\quad&space;p&space;=&space;-0.04))
 
 
 #### II. Penalized Once Reward Function
@@ -119,7 +120,7 @@ Although one might be more interested in how the agent is behaving after it was 
 
 We can observe from the graphs of training how the occurrence of extra moves is slowly declining indicating that the agent is learning.
 
-# Test Results
+## Test Results
 The agents were tested for 50 episodes each. The results are displayed below following the same logic as before.
 
 <img src=https://raw.githubusercontent.com/PascPeli/RL-Policy-Tuning/master/data/presentation/test_straight.png alt="Drawing" style="width: 1000px;"/>
@@ -133,11 +134,6 @@ The agents were tested for 50 episodes each. The results are displayed below fol
 <img src=https://raw.githubusercontent.com/PascPeli/RL-Policy-Tuning/master/data/presentation/test_actions_freq.png alt="Drawing" style="width: 1000px;"/>
 
 <img src=https://raw.githubusercontent.com/PascPeli/RL-Policy-Tuning/master/data/presentation/test_actions_cnt.png alt="Drawing" style="width: 1000px;"/>
-
-# Policy Comparison Animations
-The 4 animations below display a comparison of the agents with different policies. These animations can offer a better understanding of the agents and their approach to winning in the game. After each episode, some useful statistics are displayed.
-
-
 
 
 ## Conclusion
