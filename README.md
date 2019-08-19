@@ -44,7 +44,7 @@ $$ t \in (0,last\_step]\ ,\quad  w =\begin{cases}0 & unsuccessful\\1 & successfu
 
 In this approach, the mentality remains the same with the default function with the exception that we also apply a penalization to/of extra moves. This leads to rewards that vary depending on the actions taken during the episode. The function returns a value of 0 after each step except from the last one in which the cumulative amount of the punishments corresponding to the extra moves is added to the outcome of the episode (2). As they are only awarded after the episode has finished, the agent has to make the correlation between extra moves and punishments itself without explicitly knowing which action corresponds to which reward. The rewards, here, are still sparse, the same as with the default function.
 
-https://latex.codecogs.com/gif.latex?Reward_{penalty\_once}\&space;(t,w)=\begin{cases}\&space;\,\&space;0&space;&&space;t&space;<&space;last\_step&space;\\&space;\&space;\,\&space;1&plus;ExtraMoves*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;1\\-1&plus;ExtraMoves*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;0\end{cases}&space;\quad\big(2\big)
+![equation](https://latex.codecogs.com/gif.latex?Reward_{penalty\_once}\&space;(t,w)=\begin{cases}\&space;\,\&space;0&space;&&space;t&space;<&space;last\_step&space;\\&space;\&space;\,\&space;1&plus;ExtraMoves*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;1\\-1&plus;ExtraMoves*p&space;&&space;t&space;=&space;last\_step,\&space;w=&space;0\end{cases}&space;\quad\big(2\big))
 
 $$Reward_{penalty\_once}\ (t,w)=\begin{cases}\ \,\ 0 & t < last\_step \\ \ \,\ 1+ExtraMoves*p & t = last\_step,\ w= 1\\-1+ExtraMoves*p & t = last\_step,\ w= 0\end{cases}  \quad\big(2\big)$$
 
